@@ -1,0 +1,80 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\usepackage{hyperref}
+\hypersetup{
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+
+\date{}
+
+\begin{document}
+
+\textbf{Утверждение 2}
+
+Пусть
+$\(m \gg 0, \lambda > 0, \frac{m}{\lambda} \in \mathbb{N}, \frac{m}{\lambda} \gg 0 \).$
+Тогда оптимизация функции
+$$\( \mathrm{E}_q \log p(y | X, w) - \lambda \mathrm{D}_{KL} (q(w) || p(w | y, X, h)) \)$$
+эквивалентна оптимизации вариационной оценки обоснованности для
+произвольной случайной подвыборки $\(\hat{y}, \hat{X}\)$ мощности
+$\(\frac{m}{\lambda}\)$ из генеральной совокупности.
+
+\textbf{Указание:} Воспользоваться УЗБЧ
+
+\textbf{Доказательство}
+
+\begin{array}{c}{
+\frac{1}{\lambda} \mathrm{E}_{q} \log p(y | X, w)-\mathrm{D}_{\mathrm{KL}}(q(w)\ \|\ p(w | y, X, h))\simeq} \\ 
+{\frac{1}{\lambda} \mathrm{E}_{q} \left[ m \cdot \mathrm{E}_{(x_i, y_i)} \log p(y_i | X_i, w) \right] - \mathrm{D}_{\mathrm{KL}}(q(w)\ \|\ p(w | y, X, h)) \simeq} \\
+{\frac{1}{\lambda} \mathrm{E}_{q} \left[ m \frac{\lambda}{m} \sum_{i} \log p(y_i | X_i, w) \right] - \mathrm{D}_{\mathrm{KL}}(q(w)\ \|\ p(w | y, X, h)) \simeq} |\text{УЗБЧ}| \simeq \\
+\mathrm{E}_{q} \log p(\hat{y} | \hat{X}, w) - \mathrm{D}_{\mathrm{KL}}(q(w)\ \|\ p(w | y, X, h))
+\end{array}
+
+\end{document}
