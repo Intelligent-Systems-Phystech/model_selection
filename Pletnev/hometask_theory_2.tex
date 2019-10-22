@@ -1,0 +1,53 @@
+\documentclass[12pt,russian,a4paper]{extarticle}
+
+\usepackage[a4paper,left=10mm,right=10mm, top=10mm,bottom=10mm,bindingoffset=0cm]{geometry}
+\usepackage{amsfonts,amssymb,amsmath}
+\usepackage{nopageno}
+\usepackage{cmap}
+\usepackage{ifthen}
+\usepackage[cp1251]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{tikz}
+\usepackage{wrapfig}
+\usepackage{float}
+
+\newcommand{\Sum}{\displaystyle\sum\limits}
+\newcommand{\Max}{\max\limits}
+\newcommand{\Min}{\min\limits}
+\newcommand{\fromto}[3]{{#1}=\overline{{#2},\,{#3}}}
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\tild}{\widetilde}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\hat}{\widehat}
+\renewcommand{\emptyset}{\varnothing}
+\renewcommand{\epsilon}{\varepsilon}
+\newcommand{\ol}{\overline}
+
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}{\hbox{$#1$}}{}}
+
+%\nofiles
+\begin{document}
+
+\centerline{\large \bf Доказательство утверждения 2}
+\begin{flushright}
+  {\large \bf Выполнил: Плетнев Никита}
+\end{flushright}
+%\bigskip
+%теория 2, практика 3
+
+Преобразуем данное выражение, поделённое на $\lambda$ (постоянный множитель никак не влияет на оптимизацию):
+
+$$\frac{1}{\lambda} \mathbb{E}_{q(w)} \log{p(y|X,w)} - \mathrm{D}_{KL}(q(w)||p(w|y,X,h)) = \mathbb{E}_{q(w)} \frac{m}{\lambda}\mathbb{E}\log{p(y_i|x_i,w)} - \mathrm{D}_{KL}(q(w)||p(w|y,X,h)).$$
+
+Усиленный закон больших чисел гарантирует, что выборочное среднее независимых одинаково распределённых случайных величин почти наверное стремится к их мат. ожиданию. Поэтому если внутреннее мат. ожидание в этом выражении заменить на среднее по подвыборке, получится эквивалентное при больших $\frac{m}{\lambda}$ выражение. Так же можно поступить и со средним в определении KL-дивергенции: взять подвыборку вместо выборки. Получим эквивалентное выражение:
+
+$$\mathbb{E}_{q(w)} \frac{m}{\lambda} \frac{\lambda}{m} \sum\limits_{i=1}^{\frac{m}\lambda} \log{p(y_i|x_i,w)} - \mathrm{D}_{KL}(q(w)||p(w|\hat{y},\hat{X},h)) = \mathbb{E}_{q(w)} \log{p(\hat{y}|\hat{X},w)} - \mathrm{D}_{KL}(q(w)||p(w|\hat{y},\hat{X},h))$$ --- а это и есть вариационная оценка обоснованности для подвыборки мощности $\frac{m}{\lambda}$.
+
+Получили, что оптимизация исходного выражения эквивалентна оптимизации вариационной оценки обоснованности для случайной подвыборки мощности $\frac{m}{\lambda}$, поскольку является её пределом при увеличении мощности подвыборки. Что и требовалось доказать.
+
+\end{document} 
