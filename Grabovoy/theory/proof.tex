@@ -1,0 +1,62 @@
+\documentclass[12pt, twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+
+\usepackage{amsthm}
+\usepackage{a4wide}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{euscript}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{caption}
+\usepackage{color}
+\usepackage{bm}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+
+\newtheorem{theorem}{Теорема}
+
+
+
+\begin{document}
+\begin{theorem}
+Пусть выборка $\mathfrac{D} = \left(x_i, y_i\right)_{i=1}^{m}$ независима. Пусть $m\gg 0, \frac{m}{\lambda}\gg 0,$ тогда оптимизация выражений~\eqref{eq:1}~и~\eqref{eq:2} эквивалентны:
+\begin{equation}
+\label{eq:1}
+\begin{aligned}
+    \mathsf{E}_{q(\mathbf{w})} \log{p\left(\mathbf{Y}|\mathbf{X},\mathbf{w}\right)} - \lambda\mathsf{D}_{KL}\left(q\left(\mathbf{w}\right)||p\left(\mathbf{w}|\mathbf{Y},\mathbf{X}\right)\right)
+\end{aligned}
+\end{equation}
+
+\begin{equation}
+\label{eq:2}
+\begin{aligned}
+    \mathsf{E}_{q(\mathbf{w})}\sum_{i=1}^{\frac{m}{\lambda}}\log{p\left(\hat{y}_i|\hat{\mathbf{x}}_{i}, \mathbf{w}\right)} - \mathsf{D}_{KL}\left(q\left(\mathbf{w}\right)||p\left(\mathbf{w}|\hat{\mathbf{Y}},\hat{\mathbf{X}}\right)\right)
+\end{aligned}
+\end{equation}
+\end{theorem}
+\begin{proof}
+
+\begin{equation}
+\begin{aligned}
+   &\mathsf{E}_{q(\mathbf{w})} \log{p\left(\mathbf{Y}|\mathbf{X},\mathbf{w}\right)} - \lambda\mathsf{D}_{KL}\left(q\left(\mathbf{w}\right)||p\left(\mathbf{w}|\mathbf{Y},\mathbf{X}\right)\right) =\footnote{1} \\
+   =&\frac{1}{\lambda}\mathsf{E}_{q(\mathbf{w})}\sum_{i=1}^{m}\log{p\left(y_i|\mathbf{x}_{i}, \mathbf{w}\right)} - \mathsf{D}_{KL}\left(q\left(\mathbf{w}\right)||p\left(\mathbf{w}|\mathbf{Y},\mathbf{X}\right)\right) \approx\footnote{2}  \\
+   \approx&\frac{m}{\lambda}\mathsf{E}_{q(\mathbf{w})}\mathsf{E}_{\left(\mathbf{x}, y\right)}\log{p\left(y|\mathbf{x}, \mathbf{w}\right)}- \mathsf{D}_{KL}\left(q\left(\mathbf{w}\right)||p\left(\mathbf{w}|\mathbf{Y},\mathbf{X}\right)\right) \approx\footnote{3}  \\
+   \approx&\mathsf{E}_{q(\mathbf{w})}\sum_{i=1}^{\frac{m}{\lambda}}\log{p\left(\hat{y}_i|\hat{\mathbf{x}}_{i}, \mathbf{w}\right)} - \mathsf{D}_{KL}\left(q\left(\mathbf{w}\right)||p\left(\mathbf{w}|\mathbf{Y},\mathbf{X}\right)\right) \approx\footnote{4} \\
+   \approx&\mathsf{E}_{q(\mathbf{w})}\sum_{i=1}^{\frac{m}{\lambda}}\log{p\left(\hat{y}_i|\hat{\mathbf{x}}_{i}, \mathbf{w}\right)} - \mathsf{D}_{KL}\left(q\left(\mathbf{w}\right)||p\left(\mathbf{w}|\hat{\mathbf{Y}},\hat{\mathbf{X}}\right)\right),
+\end{aligned}
+\end{equation}
+где $\hat{\mathfrac{D}} = \left(\hat{\mathbf{X}}, \hat{\mathbf{Y}}\right)$ --- произвольная подвыборка выборки $\mathfrac{D} = \left(\mathbf{X}, \mathbf{Y}\right)$. Получили, что оптимизация 
+
+\footnotetext[1]{так как элементы выборки не зависимы}
+\footnotetext[2]{УЗБЧ}
+\footnotetext[3]{УЗБЧ}
+\footnotetext[4]{В силу того, что $m\gg 0$ и $\frac{m}{\lambda}\gg 0$}
+\end{proof}
+
+\end{document} 
+
