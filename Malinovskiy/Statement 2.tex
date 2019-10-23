@@ -1,0 +1,60 @@
+\documentclass[a4paper,14pt]{extarticle}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{euscript}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{caption}
+\usepackage{color}
+\usepackage{bm}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+
+
+\usepackage[toc,page]{appendix}
+
+\usepackage{comment}
+\usepackage{rotating}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\newtheorem{theorem}{Теорема}
+\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{corollary}{Следствие}[theorem]
+\newtheorem{definition}{Определение}[section]
+\newtheorem{example}{Пример}
+
+\numberwithin{equation}{section}
+
+\newcommand*{\No}{No.}
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+\begin{document}
+	\section*{Утверждение 2}
+	\subsection*{Формулировка}
+	Пусть $m\gg0$,$\lambda>0$,$\frac{m}{\lambda} \in \mathbb{N}$,$\frac{m}{\lambda}\gg0$. Тогда оптимизация функции
+	$$\mathrm{E}_{q} \log p(\mathbf{y} | \mathbf{X}, \mathbf{w})-\lambda \mathrm{D}_{\mathrm{KL}}(q(\mathbf{w}) \| p(\mathbf{w} | \mathbf{y}, \mathbf{X}, \mathbf{h}))$$
+	эквивалентна оптимизации вариационной оценки обоснованности для произвольной случайной подвыборки $\hat{\mathbf{y}}$, $\hat{\mathbf{X}}$ мощности $\frac{m}{\lambda} $ из генеральной
+	совокупности.
+	
+	\subsection*{Доказательство}
+
+
+$$
+\mathsf{E}_{q(\mathbf{w})} \log{p\left(\mathbf{Y}|\mathbf{X},\mathbf{w}\right)} - \lambda\mathsf{D}_{KL}\left(q\left(\mathbf{w}\right)||p\left(\mathbf{w}|\mathbf{Y},\mathbf{X}\right)\right) =$$ 
+$$=\lambda\left(\frac{1}{\lambda}\mathsf{E}_{q(\mathbf{w})}\sum_{i=1}^{m}\log{p\left(y_i|\mathbf{x}_{i}, \mathbf{w}\right)} - \mathsf{D}_{KL}\left(q\left(\mathbf{w}\right)||p\left(\mathbf{w}|\mathbf{Y},\mathbf{X}\right)\right)\right) \approx  $$
+$$\approx\lambda\left(\frac{m}{\lambda}\mathsf{E}_{q(\mathbf{w})}\mathsf{E}_{\left(\mathbf{x}, y\right)}\log{p\left(y|\mathbf{x}, \mathbf{w}\right)}- \mathsf{D}_{KL}\left(q\left(\mathbf{w}\right)||p\left(\mathbf{w}|\mathbf{Y},\mathbf{X}\right)\right)\right) \approx  $$
+$$\approx\lambda\left(\mathsf{E}_{q(\mathbf{w})}\sum_{i=1}^{\frac{m}{\lambda}}\log{p\left(\hat{y}_i|\hat{\mathbf{x}}_{i}, \mathbf{w}\right)} - \mathsf{D}_{KL}\left(q\left(\mathbf{w}\right)||p\left(\mathbf{w}|\mathbf{Y},\mathbf{X}\right)\right)\right) \approx $$
+$$\approx\lambda\left(\mathsf{E}_{q(\mathbf{w})}\sum_{i=1}^{\frac{m}{\lambda}}\log{p\left(\hat{y}_i|\hat{\mathbf{x}}_{i}, \mathbf{w}\right)} - \mathsf{D}_{KL}\left(q\left(\mathbf{w}\right)||p\left(\mathbf{w}|\hat{\mathbf{Y}},\hat{\mathbf{X}}\right)\right)\right),
+$$
+Получаем, что максимизация ELBO для подвыборки эквивалетна оптимизации исходного выражения. 
+
+Мы предологаем независимость случайных величин, а также используем усиленный закон больших чисел при оценке мат. ожидания.
+\end{document}
