@@ -1,0 +1,64 @@
+\documentclass[12pt, twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+
+\usepackage{amsthm}
+\usepackage{a4wide}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{euscript}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{caption}
+\usepackage{color}
+\usepackage{bm}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+
+\newtheorem{theorem}{Теорема}
+
+
+
+\begin{document}
+\begin{theorem}
+Пусть $\mathcal{L}$ --- дифференцируемая функция, такая что все стационарные точки $\mathcal{L}$ являются локальными минимумами. Пусть также гессиан $\mathbf{H}^{-1}$ функции потерь $\mathcal{L}$ является обратимым в каждой стационарной точке, тогда:
+\begin{equation}
+\label{eq:1}
+\begin{aligned}
+    \nabla_{\mathbf{h}}\mathcal{Q}\left(\mathsf{T}\left(\bm{\Theta}_{0}, \mathbf{h}\right), \mathbf{h}\right) = \nabla_{\mathbf{h}}\nabla_{\bm{\Theta}}\mathcal{L}\left(\bm{\Theta}^{\eta}, \mathbf{h}\right)^{\mathsf{T}}\mathbf{H}^{-1}\nabla_{\bm{\Theta}}\mathcal{Q}\left(\bm{\Theta}^{\eta}, \mathbf{h}\right).
+\end{aligned}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+
+\begin{equation}
+\label{eq:2}
+	\begin{aligned}
+		&\nabla_{\bm{\Theta}}\mathcal{L}\left(\mathsf{T}\left(\bm{\Theta}_{0}, \mathbf{h}\right)\right) = 0 \Rightarrow\\
+		\Rightarrow&\nabla_{\mathbf{h}}\left(\nabla_{\bm{\Theta}}\mathcal{L}\left(\mathsf{T}\left(\bm{\Theta}_{0}, \mathbf{h}\right)\right)\right) = \nabla_{\bm{\Theta}, \mathbf{h}}\mathcal{L}\left(\bm{\Theta}^{\eta}, \mathbf{h}\right) + \nabla_{\bm{\Theta}}^{2}\mathcal{L}\left(\bm{\Theta}^{\eta}, \mathbf{h}\right)\frac{\partial \bm{\Theta}}{\partial \mathbf{h}} = 0 \Rightarrow \\
+		\Rightarrow&\frac{\partial \bm{\Theta}}{\partial \mathbf{h}} = -\left(\nabla_{\bm{\Theta}}^{2}\mathcal{L}\left(\bm{\Theta}^{\eta}, \mathbf{h}\right)\right)^{-1}\nabla_{\bm{\Theta}, \mathbf{h}}\mathcal{L}\left(\bm{\Theta}^{\eta}, \mathbf{h}\right).
+ 	\end{aligned}
+\end{equation}
+
+\begin{equation}
+\label{eq:3}
+	\begin{aligned}
+		&\nabla_{\mathbf{h}}\mathcal{Q}\left(\mathsf{T}\left(\bm{\Theta}_{0}, \mathbf{h}\right)\right) = \nabla_{\mathbf{h}}\mathcal{Q}\left(\bm{\Theta}^{\eta}, \mathbf{h}\right)+\nabla_{\bm{\Theta}}\mathcal{Q}\left(\bm{\Theta}^{\eta}, \mathbf{h}\right)^{\mathsf{T}}\frac{\partial \bm{\Theta}}{\partial \mathbf{h}}.
+ 	\end{aligned}
+\end{equation}
+Подставляя~\eqref{eq:2} в~\eqref{eq:3} получаем:
+\begin{equation}
+\label{eq:4}
+	\begin{aligned}
+		\nabla_{\mathbf{h}}\mathcal{Q}\left(\mathsf{T}\left(\bm{\Theta}_{0}, \mathbf{h}\right)\right) &= \nabla_{\mathbf{h}}\mathcal{Q}\left(\bm{\Theta}^{\eta}, \mathbf{h}\right) - \nabla_{\bm{\Theta}}\mathcal{Q}\left(\bm{\Theta}^{\eta}, \mathbf{h}\right)^{\mathsf{T}}\left(\nabla_{\bm{\Theta}}^{2}\mathcal{L}\left(\bm{\Theta}^{\eta}, \mathbf{h}\right)\right)^{-1}\nabla_{\bm{\Theta}, \mathbf{h}}\mathcal{L}\left(\bm{\Theta}^{\eta}, \mathbf{h}\right) = \\
+		&= \nabla_{\mathbf{h}}\mathcal{Q}\left(\bm{\Theta}^{\eta}, \mathbf{h}\right) -  \nabla_{\bm{\Theta}, \mathbf{h}}\mathcal{L}\left(\bm{\Theta}^{\eta}, \mathbf{h}\right)^{\mathsf{T}}\left(\nabla_{\bm{\Theta}}^{2}\mathcal{L}\left(\bm{\Theta}^{\eta}, \mathbf{h}\right)\right)^{-1}\nabla_{\bm{\Theta}}\mathcal{Q}\left(\bm{\Theta}^{\eta}, \mathbf{h}\right)   
+ 	\end{aligned}
+\end{equation}
+\end{proof}
+
+\end{document} 
+
