@@ -1,0 +1,68 @@
+\documentclass[a4paper,14pt]{extarticle}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{euscript}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{caption}
+\usepackage{color}
+\usepackage{bm}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+
+
+\usepackage[toc,page]{appendix}
+
+\usepackage{comment}
+\usepackage{rotating}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\newtheorem{theorem}{Теорема}
+\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{corollary}{Следствие}[theorem]
+\newtheorem{definition}{Определение}[section]
+\newtheorem{example}{Пример}
+
+\numberwithin{equation}{section}
+
+\newcommand*{\No}{No.}
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+\begin{document}
+\section{Утверждение}
+\begin{theorem}
+	Пусть $h \in \mathcal{F}^1$ --- дифференцируемая выпуклая функция. Пусть также гессиан $\nabla^2_1 h$ функции потерь обратимым на множестве оптимальных точек, тогда:
+$$
+	\nabla_\lambda g\left(\mathsf{T}\left(\bm{X}_{0}, \lambda\right), \lambda\right) = \nabla_{\lambda} g(X^{\nu}(\lambda),\lambda)-\left(\nabla_{X,\lambda}^{2} h\right)^{T}\left(\nabla_{X}^{2} h\right)^{-1} \nabla_{X} g(X^{\nu}(\lambda),\lambda)
+$$
+\end{theorem}
+\begin{proof}
+	Запишем условие оптимальности первого порядка
+	$$\nabla_{X} h(X(\lambda), \lambda)=0$$
+	продифференцируем это уравнение
+	$$
+	\nabla_{X,\lambda}^{2} h+\nabla_{X}^{2} h \cdot \mathrm{D} X=0
+	$$
+	выразим производную $X$, используя обратимость гессиана.
+	$$
+	\mathrm{D} X = - \left(\nabla_{X}^{2} h\right)^{-1}\nabla_{X,\lambda}^{2} h
+	$$
+	Теперь запишем полный градиент
+	$$
+		\nabla_\lambda g\left(\mathsf{T}\left(\bm{X}_{0}, \lambda\right), \lambda\right) = \nabla_{\lambda} g(X^{\nu}(\lambda),\lambda) +  \nabla_{X} g(X^{\nu}(\lambda),\lambda) \mathrm{D} X
+	$$
+	Используем знание от том, что $A^Tb = b^TA$ и подставляем выражение для $\left(\mathrm{D} X\right)^T = - \left(\left(\nabla_{X}^{2} h\right)^{-1}\nabla_{X,\lambda}^{2} h\right)^T = \left(\nabla_{X,\lambda}^{2} h\right)^T\left(\nabla_{X}^{2} h\right)^{-T}$, поскольку гессиан симметричен, то $-T$ переходит в $-1$. Подставляем
+	$$
+	\nabla_\lambda g\left(\mathsf{T}\left(\bm{X}_{0}, \lambda\right), \lambda\right) = \nabla_{\lambda} g(X^{\nu}(\lambda),\lambda)-\left(\nabla_{X,\lambda}^{2} h\right)^{T}\left(\nabla_{X}^{2} h\right)^{-1} \nabla_{X} g(X^{\nu}(\lambda),\lambda)
+	$$
+	Что и требовалось доказать.
+\end{proof}
+\end{document}
