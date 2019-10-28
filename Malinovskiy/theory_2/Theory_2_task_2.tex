@@ -1,0 +1,72 @@
+\documentclass[a4paper,14pt]{extarticle}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{euscript}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{caption}
+\usepackage{color}
+\usepackage{bm}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+
+
+\usepackage[toc,page]{appendix}
+
+\usepackage{comment}
+\usepackage{rotating}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\newtheorem{theorem}{Теорема}
+\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{corollary}{Следствие}[theorem]
+\newtheorem{definition}{Определение}[section]
+\newtheorem{example}{Пример}
+
+\numberwithin{equation}{section}
+
+\newcommand*{\No}{No.}
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+\begin{document}
+	\section*{RMAD without momentum}
+	\subsection*{Stochastic gradient descent without momentum}
+	\begin{enumerate}
+		\item input: initial $\mathbf{w}_1$, learning rates $\alpha$, loss function $L(\mathbf{w},\mathbf{\theta},t)$
+		\item initialize $\mathbf{v}_1 = 0$
+		\item for $t=1$ to $T$ do
+		\item $g_t \sim \nabla_w L(\mathbf{w}_t,\mathbf{\theta},t)$
+		\item $v_t = - g_t$
+		\item $w_{t+1} = w_t + \alpha_t v_t$
+		\item end for
+		\item output: trained parameters $w_T$
+		
+	\end{enumerate}
+ Мы не накапливаем информацию о градиентах в переменной $v_t$, а просто вычитаем стох. оценку градиента. Далее используем данный алгоритм и перепишем в режиме обратного дифференцирования:
+\begin{enumerate}
+	\item input: $\mathbf{w}_T$, $\mathbf{v}_T$, $\alpha$, train loss $L(\mathbf{w}, \mathbf{\theta}, t)$, loss $f(\mathbf{w})$
+	\item initialize $d\mathbf{v}=0$, $d\mathbf{\theta}=0$, $d\alpha =0$
+	\item initialize $d\mathbf{w} = \nabla_\mathbf{w} f (\mathbf{w}_T )$
+	\item for $t=T$ counting down to $1$ do
+	\item $d \alpha_{t}=d \mathbf{w}^{\top} \mathbf{v}_{t}$
+	\item $\mathbf{w}_{t-1}=\mathbf{w}_{t}-\alpha_{t} \mathbf{v}_{t}$
+	\item $\mathbf{g}_{t-1} \sim \nabla_{\mathbf{w}} L\left(\mathbf{w}_{t-1}, \boldsymbol{\theta}, t-1\right)$
+	\item $\mathbf{v}_{t-1} = - \mathbf{g}_{t-1}$
+	\item $d \mathbf{v}=d \mathbf{v}+\alpha_{t} d \mathbf{w}$
+	\item $d \mathbf{w}=d \mathbf{w}- d \mathbf{v} \nabla_{\mathbf{w}} \nabla_{\mathbf{w}} L\left(\mathbf{w}_{t}, \boldsymbol{\theta}, t\right)$
+	\item $d \boldsymbol{\theta}=d \boldsymbol{\theta}-d \mathbf{v} \nabla_{\boldsymbol{\theta}} \nabla_{\mathbf{w}} L\left(\mathbf{w}_{t}, \boldsymbol{\theta}, t\right)$
+	\item end for
+	\item $\text { output gradient of } f\left(\mathbf{w}_{T}\right) \text { w.r.t } \mathbf{w}_{1}, \mathbf{v}_{1}, \gamma, \boldsymbol{\alpha} \text { and } \boldsymbol{\theta}$
+
+\end{enumerate}
+	Здесь мы не используем параметр затухания гамма, по сути мы его кладем равным нулю, и используем то, что мы прибавляем оценку антиградиента на каждом шаге. Такой алгоритм даже проще, чем алгоритм с инерцией.
+	
+\end{document}
