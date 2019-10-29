@@ -1,0 +1,47 @@
+ \documentclass[12pt]{article}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel} 
+
+\usepackage{amsmath,amsfonts,amsthm,amssymb,amsbsy,amstext,amscd,amsxtra,multicol}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+
+\DeclareMathOperator{\Tr}{Tr}
+
+\definecolor{linkcolor}{HTML}{799B03} % цвет ссылок
+\definecolor{urlcolor}{HTML}{799B03} % цвет гиперссылок
+\hypersetup{pdfstartview=FitH,  linkcolor=linkcolor,urlcolor=urlcolor, colorlinks=true}
+
+\hoffset=0mm
+\voffset=0mm
+\textwidth=179mm        % ширина текста
+\oddsidemargin=-5.5mm   % левое поле 25.4 - 5.4 = 20 мм
+%\textheight=230mm       % высота текста 297 (A4) - 40
+%\topmargin=-15.4mm      % верхнее поле (10мм)
+%\headheight=5mm      % место для колонтитула
+%\headsep=2mm          % отступ после колонтитула
+%\footskip=7.5mm         % отступ до нижнего колонтитула
+
+\begin{document}
+\noindent\textbf{Утверждение}
+Максимизация вариационной нижней оценки
+$$\int\limits_{w}{q(w) \log{\dfrac{p(y, w|X, h)}{q(w)}}dw}$$
+эквивалентна минимизации расстояния Кульбака-Лейблера между распределением $q(w) \in \mathcal{Q}$ и апостериорным распределением параметров $p(w|y, X, h)$:
+$$\hat{a}=\arg\max\limits_{q\in\mathcal{Q}}\int\limits_{w}{q(w) \log{\dfrac{p(y, w|X, h)}{q(w)}}dw} \Leftrightarrow \hat{q}=\arg\min\limits_{q\in\mathcal{Q}}{D_{KL}(q(w)||p(w|y,X,h))},$$
+\textbf{Доказательство}
+$$D_{KL}(q(w)||p(w|y,X,h)) = \int\limits_{w}{q(w)\log{\dfrac{q(w)}{p(w|y,X,h)}}}dw = -\int\limits_{w}{q(w)\log{\dfrac{p(w|y,X,h)}{q(w)}}}dw=$$
+$$=-\int\limits_{w}{q(w)\log{\dfrac{p(w,y|X,h)}{q(w)}}}dw + \int\limits_{w}{q(w)\log{p(y|X,h)}}dw.$$
+Так как
+$$\int\limits_{w}{q(w)}dw = 1$$
+то получаем
+$$D_{KL}(q(w)||p(w|y,X,h)) = -\int\limits_{w}{q(w)\log{\dfrac{p(w,y|X,h)}{q(w)}}}dw + \log{p(y|X,h)}$$
+Так как $\log{p(y|X,h)}$ не зависит от $w$, то
+$$\hat{q}=\arg\min\limits_{q\in\mathcal{Q}}{D_{KL}(q(w)||p(w|y,X,h))} = \arg\min\limits_{q\in\mathcal{Q}}{\left(-\int\limits_{w}{q(w)\log{\dfrac{p(w,y|X,h)}{q(w)}}}dw + \log{p(y|X,h)}\right)} = $$
+$$ = \arg\max\limits_{q\in\mathcal{Q}}{\int\limits_{w}{q(w)\log{\dfrac{p(y, w|X,h)}{q(w)}}}dw}$$
+\end{document}

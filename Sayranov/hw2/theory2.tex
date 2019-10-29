@@ -1,0 +1,47 @@
+ \documentclass[12pt]{article}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel} 
+
+\usepackage{amsmath,amsfonts,amsthm,amssymb,amsbsy,amstext,amscd,amsxtra,multicol}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+
+\DeclareMathOperator{\Tr}{Tr}
+
+\definecolor{linkcolor}{HTML}{799B03} % цвет ссылок
+\definecolor{urlcolor}{HTML}{799B03} % цвет гиперссылок
+\hypersetup{pdfstartview=FitH,  linkcolor=linkcolor,urlcolor=urlcolor, colorlinks=true}
+
+\hoffset=0mm
+\voffset=0mm
+\textwidth=179mm        % ширина текста
+\oddsidemargin=-5.5mm   % левое поле 25.4 - 5.4 = 20 мм
+%\textheight=230mm       % высота текста 297 (A4) - 40
+%\topmargin=-15.4mm      % верхнее поле (10мм)
+%\headheight=5mm      % место для колонтитула
+%\headsep=2mm          % отступ после колонтитула
+%\footskip=7.5mm         % отступ до нижнего колонтитула
+
+\begin{document}
+\noindent\textbf{Утверждение.}
+Пусть $L$ - дифференцируемая фукнция, такая что все стационарные точки $L$ являются локальными минимумами. Пусть также гессиан $H^{-1}$ функции потерь $L$ является обратимым в каждой стационарной точке. Тогда
+$$\nabla_hQ(T(\theta_0, h),h)=\nabla_hQ(\theta^{\eta}, h) - \nabla_h\nabla_\theta L(\theta^\eta,h)^\top H^{-1}\nabla_\theta Q(\theta^\eta, h)$$
+\noindent\textbf{Доказательство.}
+Условие оптимальности:
+$$\nabla_\theta L(T(\theta_0, h)) = 0$$
+Отсюда получаем
+$$0 = \nabla_h\left(\nabla_\theta L(T(\theta_0, h))\right) = \nabla^2_{\theta,h}L(\theta^\eta, h) + \nabla^2_\theta L(\theta^\eta, h)\theta'_h$$
+Следовательно
+$$\theta'_h = (\nabla^2_\theta L(\theta^\eta, h))^{-1}\nabla^2_{\theta,h}L(\theta^\eta, h)$$
+Тогда полный градиент
+$$\nabla_hQ(T(\theta_0, h), h) = \nabla_hQ(\theta^{\eta}, h) + \nabla_\theta Q(\theta^\eta, h)^\top\theta'_h$$
+Запишется как
+$$\nabla_hQ(T(\theta_0, h), h) = \nabla_hQ(\theta^{\eta}, h) + \nabla_\theta Q(\theta^\eta, h)^\top(\nabla^2_\theta L(\theta^\eta, h))^{-1}\nabla^2_{\theta,h}L(\theta^\eta, h) = $$
+$$ = \nabla_hQ(\theta^{\eta}, h) + \nabla^2_{\theta,h}L(\theta^\eta, h)^\top(\nabla^2_\theta L(\theta^\eta, h))^{-1}\nabla_\theta Q(\theta^\eta, h)$$
+\end{document}
