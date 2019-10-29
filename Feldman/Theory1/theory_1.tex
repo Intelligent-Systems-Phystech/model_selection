@@ -1,0 +1,100 @@
+\documentclass[12pt]{article}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}        % Кодировка входного документа;
+                                    % при необходимости, вместо cp1251
+                                    % можно указать cp866 (Alt-кодировка
+                                    % DOS) или koi8-r.
+
+\usepackage[english,russian]{babel} % Включение русификации, русских и
+                                    % английских стилей и переносов
+
+\usepackage{amsmath,amsfonts,amsthm,amssymb,amsbsy,amstext,amscd,amsxtra,multicol}
+\usepackage{verbatim}
+\usepackage{tikz} %Рисование автоматов
+\usetikzlibrary{automata,positioning}
+\usepackage{multicol} %Несколько колонок
+\usepackage{graphicx}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+\usepackage[stable]{footmisc}
+
+\usepackage{amsmath,amssymb}
+\DeclareMathOperator{\E}{\mathbb{E}}
+
+
+%греческие буквы
+\let\epsilon\varepsilon
+\let\es\emptyset
+\let\eps\varepsilon
+\let\al\alpha
+\let\sg\sigma
+\let\ga\gamma
+\let\ph\varphi
+\let\om\omega
+\let\ld\lambda
+\let\Ld\Lambda
+\let\vk\varkappa
+\let\Om\Omega
+\def\abstractname{}
+
+\let\yield\Rightarrow
+
+\def\R{{\cal R}}
+\def\A{{\cal A}}
+\def\B{{\cal B}}
+\def\C{{\cal C}}
+\def\D{{\cal D}}
+
+\def\w{{\mathbf{w} }}
+\def\y{{\mathbf{y}}}
+\def\h{{\mathbf h }}
+
+%классы сложности
+\def\REG{{\mathsf{REG}}}
+\def\CFL{{\mathsf{CFL}}}
+
+
+
+\newcounter{problem}
+\newcounter{uproblem}
+\newcounter{subproblem}
+\newcounter{prvar}
+
+
+
+
+\def\pr{\medskip\noindent\stepcounter{problem}{\bf \theproblem .  }\setcounter{subproblem}{0} }
+\def\prstar{\medskip\noindent\stepcounter{problem}{\bf $\mathbf{\theproblem}^*$\negthickspace.  }\setcounter{subproblem}{0} }
+\def\prpfrom[#1]{\medskip\noindent\stepcounter{problem}{\bf Задача \theproblem~(№#1 из задания).  }\setcounter{subproblem}{0} }
+\def\prp{\medskip\noindent\stepcounter{problem}{\bf Задача \theproblem .  }\setcounter{subproblem}{0} }
+
+
+\def\prsub{\medskip\noindent\stepcounter{subproblem}{\sf \thesubproblem .} }
+
+
+
+
+\title{\Large Первое теоретическое задание}
+\author{Фельдман Даниил}
+\date{}
+
+
+
+
+
+
+\begin{document}
+
+\maketitle
+
+Докажем утверждение о том, что максимизация вариационной нижней оценки эквивалентна минимизации KL-дивергенции между распределением $q(\w)\in Q$ и апостериорным распределением параметров $p(\w |\h ,X,\y)$:
+$$\hat{q} = \arg\max\limits_{q\in Q}\int\limits_{\w} q(\w)\log \frac{p(\y,\w|X,\h)}{q(\w)} d\w \Leftrightarrow \hat{q} = \arg\min\limits_{q\in Q} D_{KL} (q(\w)||p(\w|\y,X,\h))$$ 
+
+$$D_{KL}(q(\w)||p(\w|\y,X,\h)) = \int\limits_{\w}q(\w)\log\frac{q(\w)}{p(\w|\y,X,\h)} = $$
+$$= -\int\limits_{\w}q(\w)\log\frac{p(\w|\y,X,\h)}{q(\w)} =$$
+$$= -(\int\limits_{\w}q(\w)\log\frac{p(\y,\w|X,\h)}{q(\w)}d\w - \int\limits_{w}q(\w)\log p(\y|X,\h)d\w) = $$
+$$= -(\int\limits_{\w}q(\w)\log\frac{p(\y,\w|X,\h)}{q(\w)}d\w - \log p(\y|X,\h)\int\limits_{w}q(\w)d\w) = $$
+$$= -\int\limits_{\w}q(\w)\log\frac{p(\y,\w|X,\h)}{q(\w)}d\w + \log p(\y|X,\h)$$
+
+Мы получили два слагаемых, второе из которых не зависит от $\w$. Поэтому минимизация KL-дивергенции эквивалентна максимизации первого слагаемого без знака минус, что и является вариационной нижней оценкой.
+
+\end{document}
