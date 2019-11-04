@@ -1,0 +1,84 @@
+\documentclass[a4paper,12pt,notitlepage]{article}
+\usepackage[T2A]{fontenc}
+\def\R{{\mathbb{R}}}
+\def\Q{{\cal Q}}
+\def\L{{\textbf{L}}}
+\def\t{{\boldsymbol{\theta}}}
+\def\w{{\textbf{w}}}
+\def\h{{\textbf{h}}}
+\def\H{{\textbf{H}}}
+\def\y{{\textbf{y}}}
+\def\X{{\textbf{X}}}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amssymb,amsmath}
+\usepackage{geometry}
+\geometry{left=2cm}
+\geometry{right=1.5cm}
+\geometry{top=1.5cm}
+\geometry{bottom=1.5cm}
+\textheight=25cm % высота текста
+\textwidth=16cm % ширина текста
+\oddsidemargin=0pt % отступ от левого края
+\topmargin=0pt % отступ от верхнего края
+\parindent=0pt % абзацный отступ
+\parskip=0pt % интервал между абзацами
+\tolerance=2000 % терпимость к "жидким" строкам
+\flushbottom % выравнивание высоты страниц
+\usepackage{fancyhdr}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Самохина Алина}
+\lhead{Задание по курсу "Выбор модели глубокого обучения"}
+\rfoot{Page \thepage}
+
+
+\begin{document}
+%\title{Домашнее задание №1\\Выбор модели глубокого обучения}
+%\author{Самохина Алина, 904a}
+%\date{\today}
+%\maketitle
+
+\section*{Утверждение 1}
+Пусть L — дифференцируемая функция, такая что все стационарные точки L  являются локальными минимумами. Пусть также гессиан $\H^{-1}$ функции потерь L является обратимым в каждой стационарной точке.
+Тогда
+$$ \nabla_{\h}\Q (T(\t_0, \h), \h) = \nabla_\h\Q(\t^{\eta}, \h) - 
+\nabla_\h \nabla_\t L(\t^\eta, \h)^T\H^{-1}\nabla_\t\Q(\t^\eta, \h)$$
+
+\subsection*{Доказательство}
+
+Рассматриваем $\Q(T(\t_0, \h)) \Longrightarrow L(T(\t_0, \h))$.
+\\
+
+По условию утверждения $\nabla_\t L(T(\t_0, \h))=0$
+
+
+$$\Longrightarrow \nabla_\h (\nabla_\t L(T(\t_0, \h))) = \nabla_\t \nabla_\h L(\t^\eta, \h)+
+\nabla_\t^2 L(\t^\eta, \h)\frac{\partial\t}{\partial\h} = 0$$
+
+$$
+\nabla_\t^2 L(\t^\eta, \h)\frac{\partial\t}{\partial\h} = -\nabla_\t \nabla_\h L(\t^\eta, \h)
+$$
+
+$$
+\frac{\partial\t}{\partial\h} = -(\nabla_\t^2 L(\t^\eta, \h))^{-1}\nabla_\t \nabla_\h L(\t^\eta, \h)
+$$
+\\
+
+Также известно, что
+$
+T(\t, \h) = \t - \beta\nabla L(\t, \h)
+$
+\\
+
+$$
+\Longrightarrow \nabla_\h \Q(T(\t_0, \h)) = \nabla_\h \Q(\t^\eta, \h) + \nabla_\t \Q(\t^\eta, \h)^T\frac{\partial\t}{\partial\h}
+$$
+
+$$
+\nabla_\h \Q(T(\t_0, \h)) = \nabla_\h \Q(\t^\eta, \h)- 
+\nabla_\h \nabla_\t L(\t^\eta, \h)^T\H^{-1}\nabla_\t\Q(\t^\eta, \h)
+$$
+
+\end{document}

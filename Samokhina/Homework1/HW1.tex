@@ -1,0 +1,82 @@
+\documentclass[a4paper,12pt,notitlepage]{article}
+\usepackage[T2A]{fontenc}
+\def\R{{\mathbb{R}}}
+\def\Q{{\cal Q}}
+\def\w{{\textbf{w}}}
+\def\h{{\textbf{h}}}
+\def\y{{\textbf{y}}}
+\def\X{{\textbf{X}}}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amssymb,amsmath}
+\usepackage{geometry}
+\geometry{left=2cm}
+\geometry{right=1.5cm}
+\geometry{top=1.5cm}
+\geometry{bottom=1.5cm}
+\textheight=25cm % высота текста
+\textwidth=16cm % ширина текста
+\oddsidemargin=0pt % отступ от левого края
+\topmargin=0pt % отступ от верхнего края
+\parindent=0pt % абзацный отступ
+\parskip=0pt % интервал между абзацами
+\tolerance=2000 % терпимость к "жидким" строкам
+\flushbottom % выравнивание высоты страниц
+\usepackage{fancyhdr}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Самохина Алина}
+\lhead{Задание по курсу "Выбор модели глубокого обучения"}
+\rfoot{Page \thepage}
+
+
+\begin{document}
+%\title{Домашнее задание №1\\Выбор модели глубокого обучения}
+%\author{Самохина Алина, 904a}
+%\date{\today}
+%\maketitle
+
+\section*{Утверждение 1}
+
+Максимизация вариационной нижней оценки
+$$ \int_{\w}q(\w)\log\frac{p(\y, \w, | \X, \h)}{q(\w)}d\w  $$
+эквивалентна минимизации расстояния Кульбака–Лейблера между распределением
+$q(\w) \in \Q$ и апостериорным распределением параметров $p(\w | \y, \X, \h)$:
+
+$$ \hat{q} = \arg \max_{q \in \Q} \int_{\w}q(\w)\log\frac{p(\y, \w, | \X, \h)}{q(\w)}d\w  \Longleftrightarrow \hat{q} = \arg \min_{q \in \Q} D_{KL}(q(\w)\|p(\w|\y, \X, \h)), $$
+
+$$D_{KL}(q(\w)\|p(\w|\y, \X, \h)) =  \int_{\w}q(\w) \log(\frac{q(\w)}{p(\w|\y, \X, \h)})$$
+
+\subsection*{Доказательство}
+Рассмотрим выражения.
+
+
+%%\begin{equation}
+\begin{multline}
+\arg \max_{q \in \Q} \int_{\w}q(\w)\log\frac{p(\y, \w, | \X, \h)}{q(\w)}d\w = \\
+ =\arg \min_{q \in \Q} \int_{\w}-q(\w)\log\frac{p(\y, \w, | \X, \h)}{q(\w)}d\w = \\
+ = \arg \min_{q \in \Q} \int_{\w}q(\w)\log\frac{q(\w)}{p(\y, \w, | \X, \h)}d\w  
+\end{multline}
+
+
+%%\end{equation}
+\begin{equation}
+\arg \min_{q \in \Q} D_{KL}(q(\w)\|p(\w|\y, \X, \h)) = \arg \min_{q \in \Q} \int_{\w}q(\w) \log\frac{q(\w)}{p(\w|\y, \X, \h)} d\w  
+\end{equation}
+
+Тогда утверждение теоремы равнозначно следующему утверждению:
+\begin{equation}
+  p(\y, \w, | \X, \h) \sim  p(\w|\y, \X, \h)
+\end{equation}
+
+\begin{equation}
+  p(\w|\y, \X, \h) = \frac{p(\y|\w, \X, \h)p(\w|\X, \h)}{\int_{\w} p(\y|\w)p(\w|\X, \h) d\w}
+\end{equation}
+
+\begin{equation}
+  p(\y, \w, | \X, \h)= {p(\y|\w, \X, \h)p(\w|\X, \h)} 
+\end{equation}
+
+Учитывая, что интеграл в знаменателе (4) из формулы Байеса ялвяется нормировочной константой, то утверждение (3) является верным, ч.т.д.
+\end{document}
