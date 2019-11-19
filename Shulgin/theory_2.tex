@@ -1,0 +1,82 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\usepackage{hyperref}
+\hypersetup{
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+
+\date{}
+
+\begin{document}
+
+\textbf{Утверждение (Pedregosa, 2016)}\\
+Пусть \(L\) --- дифференцируемая функция, такая что все стационарные
+точки \(L\) являются локальными минимумами. Пусть также гессиан
+\(H^{−1}\) функции потерь \(L\) является обратимым в каждой стационарной
+точке. Тогда
+
+\[\nabla_{\mathrm{h}} Q\left(T\left(\theta_{0}, \mathbf{h}\right), \mathbf{h}\right)=\nabla_{\mathbf{h}} Q\left(\boldsymbol{\theta}^{\eta}, \mathbf{h}\right)-\nabla_{\mathbf{h}} \nabla_{\boldsymbol{\theta}} L\left(\boldsymbol{\theta}^{\eta}, \mathbf{h}\right)^{\top} \mathbf{H}^{-1} \nabla_{\boldsymbol{\theta}} Q\left(\boldsymbol{\theta}^{\eta}, \mathbf{h}\right)\]
+
+\textbf{Доказательство}
+
+Для стационарной точки выполняется, что
+\(\nabla_{\theta} L(T(\theta_{0}, h))=0\)
+
+Следовательно
+\(\nabla_{h}\left(\nabla_{\theta} L\left(T\left(\theta_{0}, h\right)\right)\right)= \nabla_{\theta, h} L\left(\theta^{\eta}, h\right)+\nabla_{\theta}^{2} L\left(\theta^{\eta}, h\right) \nabla_h \theta=0\)
+
+Из предыдущего выражаем
+\( \nabla_h \theta = -\left(\nabla_{\theta}^{2} L\left(\theta^{\eta}, h\right)\right)^{-1} \nabla_{\theta, h} L\left(\theta^{\eta}, h\right)\)
+
+Тогда
+
+\(\begin{array}{l} \nabla_h Q\left(T\left(\theta_{0}, h\right)\right) &= \nabla_{h} Q\left(\theta^{\eta}, h\right)+\nabla_{\theta} Q\left(\theta^{\eta}, h\right)^{\top} \nabla_h \theta \\&= \nabla_{h} Q\left(\theta^{\eta}, h\right)-\nabla_{\theta} Q\left(\theta^{\eta}, h\right)^{\top}\left(\nabla_{\theta}^{2} L\left(\theta^{\eta}, h\right)\right)^{-1} \nabla_{\theta, h} L\left(\theta^{\eta}, h\right) \\ &= \nabla_{h} Q \left(\theta^{\eta}, h\right)-\nabla_{\theta, h} L\left(\theta^{\eta}, h\right)^{\top}\left(\nabla_{\theta}^{2} L\left(\theta^{\eta}, h\right)\right)^{-1} \nabla_{\theta} Q\left(\theta^{\eta}, h\right)\end{array}\)
+
+\end{document}

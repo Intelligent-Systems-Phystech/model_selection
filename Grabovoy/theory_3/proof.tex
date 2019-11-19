@@ -1,0 +1,92 @@
+\documentclass[12pt, twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+
+\usepackage{amsthm}
+\usepackage{a4wide}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{euscript}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{caption}
+\usepackage{color}
+\usepackage{bm}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+
+\newtheorem{theorem}{Теорема}
+
+
+
+\begin{document}
+\begin{theorem}
+Пусть
+\begin{enumerate}
+\item Заданы компактные множества $\mathbf{U}_{\mathbf{h}} \subset \mathbb{H}, \mathbf{U}_{\bm{\theta}_{\mathbf{w}}} \subset \bm{\theta}_{\mathbf{w}}, \mathbf{U}_{\bm{\theta}_{\bm{\Gamma}}} \subset \bm{\theta}_{\bm{\Gamma}}$.
+
+\item Вариационное распределение $q_{\mathbf{w}}\left(\mathbf{w}|\bm{\Gamma}, \bm{\theta}_{\mathbf{w}}\right)$  является абсолютно непрерывным и унимодальным на  $U_{\bm{\theta}}$.
+Его мода и матожидание совпадают:
+
+\[
+  \textbf{mode}~q_{\mathbf{w}}\left(\mathbf{w}|\bm{\Gamma}, \bm{\theta}_{\mathbf{w}}\right)= \mathsf{E}_{q_{\mathbf{w}}\left(\mathbf{w}|\bm{\Gamma}, \bm{\theta}_{\mathbf{w}}\right)} \mathbf{w}.
+\]
+
+
+
+
+\item Априорное распределение $p\left(\mathbf{w}|\bm{\Gamma}, \mathbf{h}, \bm{\lambda}\right)$ является абсолютно непрерывным и унимодальным на  $U_\mathbf{h}$. Его мода и матожидание совпадают и не зависят от гиперпараметров $\mathbf{h}$  на $\mathbf{U}_{\mathbf{h}}$ и структуры $\Gamma$ на $\mathbf{U}_{\bm{\theta}_{\bm{\Gamma}}}$:
+$
+\mathsf{E}_{p\left(\mathbf{w}|\bm{\Gamma}, \mathbf{h}, \bm{\lambda}\right)}~\mathbf{w} = \textbf{mode}~p\left(\mathbf{w}|\bm{\Gamma}_1, \mathbf{h}_1, \bm{\lambda}\right)=\textbf{mode}~p\left(\mathbf{w}|\bm{\Gamma}_1, \mathbf{h}_2, \bm{\lambda}\right)=\mathbf{m}
+$
+\text{ для любых }$~\mathbf{h}_1,\mathbf{h}_2 \in \mathbf{U}_{\mathbf{h}}, \Gamma_1,\Gamma_2 \in \mathbf{U}_{\bm{\Gamma}}$.
+
+
+\item Параметры модели $\mathbf{w}$ имеют конечные вторые моменты по маргинальным распределениям:
+$
+   \int_{\Gamma}q_{\bm{\Gamma}}\left(\bm{\Gamma}|\bm{\theta}_{\bm{\Gamma}}\right)q_{\mathbf{w}}\left(\mathbf{w}|\bm{\Gamma}, \bm{\theta}_{\mathbf{w}}\right)_{\mathbf{w}} d\Gamma, \quad \int_{\Gamma}q_{\bm{\Gamma}}\left(\bm{\Gamma}|\bm{\theta}_{\bm{\Gamma}}\right)p\left(\mathbf{w}|\bm{\Gamma}, \mathbf{h}, \bm{\lambda}\right) d\Gamma
+$
+при любых $\bm{\theta}_{\mathbf{w}}\in \mathbf{U}_{\bm{\theta}_{\mathbf{w}}}, \bm{\theta}_{\bm{\Gamma}} \in \mathbf{U}_{\bm{\theta}_{\bm{\Gamma}}}, \mathbf{h} \in \mathbf{U}_{\mathbf{h}}.$
+
+
+\item Вариационное распределение $q_{\mathbf{w}}\left(\mathbf{w}|\bm{\Gamma}, \bm{\theta}_{\mathbf{w}}\right)$ является липшицевым по $\mathbf{w}$ с параметров~$L$.
+
+\item Значение $q_{\mathbf{w}}\left(\mathbf{w}|\bm{\Gamma}, \bm{\theta}_{\mathbf{w}}\right)$ не равно нулю при любых $\bm{\theta} \in \mathbf{U}_{\bm{\theta}}, \Gamma \in \mathbb{G}$.
+\item Точная нижняя грань $q_{\mathbf{w}}\left(\mathbf{m}|\bm{\Gamma}, \bm{\theta}_{\mathbf{w}}\right)$ не равна нулю при $\bm{\theta}_{\mathbf{w}}\in \mathbf{U}_{\bm{\theta}_{\mathbf{w}}}$ и $\Gamma \in \mathbb{G}$:
+\[
+    \inf_{\Gamma \in \mathbb{G}, \bm{\theta}_{\mathbf{w}}\in \mathbf{U}_{\bm{\theta}_{\mathbf{w}}}} q_{\mathbf{w}}\left(\mathbf{m}|\bm{\Gamma}, \bm{\theta}_{\mathbf{w}}\right) > 0.
+\]
+\end{enumerate}
+Тогда 
+\[
+   \left|\mathsf{E}_{q_{\bm{\Gamma}}\left(\bm{\Gamma}|\bm{\theta}_{\bm{\Gamma}}\right)} {\rho}(\mathbf{w}|\Gamma, \bm{\theta}_{\mathbf{w}}, \mathbf{h}, \bm{\lambda})^{-1} - 1\right| 
+\leq \text{Const } \iint_{\Gamma,\mathbf{w}} |\mathbf{w}| \cdot |q_{\mathbf{w}}\left(\mathbf{w}|\bm{\Gamma}, \bm{\theta}_{\mathbf{w}}\right) - p\left(\mathbf{w}|\bm{\Gamma}, \mathbf{h}, \bm{\lambda}\right)|{q_{\bm{\Gamma}}\left(\bm{\Gamma}|\bm{\theta}_{\bm{\Gamma}}\right)} d\mathbf{w} d\Gamma.
+\]
+\end{theorem}
+
+\footnotetext[1]{Занесли модуль под знак интеграла}
+\footnotetext[2]{Условие Лившица из 5}
+\footnotetext[3]{Из 7го условия теоремы}
+\footnotetext[4]{Из 2 и 3 условия}
+\footnotetext[5]{Перепишем математическое ожидание через интеграл и внесем модуль под знак интеграла}
+
+\begin{proof}
+\begin{equation*}
+\begin{aligned}
+&\left|\mathsf{E}_{q_{\bm{\Gamma}}\left(\bm{\Gamma}|\bm{\theta}_{\bm{\theta}}\right)}\rho\left(\mathbf{w}|\bm{\Gamma}, \bm{\theta}_{\mathbf{w}}, \mathbf{h}, \bm{\lambda}\right)^{-1} - 1\right| = 
+\left|\int_{\bm{\Gamma}}\left(\frac{q_{\mathbf{w}\left(\text{mode}~q_{\mathbf{w}}\left(\mathbf{w}|\bm{\Gamma}, \bm{\theta}_{\mathbf{w}}\right)|\bm{\Gamma}, \bm{\theta}_{\mathbf{w}}\right)}}{q_{\mathbf{w}\left(\text{mode}~p_{\mathbf{w}}\left(\mathbf{w}|\bm{\Gamma}, \mathbf{h}, \bm{\lambda}\right)|\bm{\Gamma}, \bm{\theta}_{\mathbf{w}}\right)}}\right)q_{\bm{\Gamma}}\left(\bm{\Gamma}|\bm{\theta}_{\bm{\Gamma}}\right)d\bm{\Gamma} - 1\right| = \\
+&= \left|\int_{\bm{\Gamma}}\left(\frac{q_{\mathbf{w}\left(\text{mode}~q_{\mathbf{w}}\left(\mathbf{w}|\bm{\Gamma}, \bm{\theta}_{\mathbf{w}}\right)|\bm{\Gamma}, \bm{\theta}_{\mathbf{w}}\right)} - q_{\mathbf{w}\left(\text{mode}~p_{\mathbf{w}}\left(\mathbf{w}|\bm{\Gamma}, \mathbf{h}, \bm{\lambda}\right)|\bm{\Gamma}, \bm{\theta}_{\mathbf{w}}\right)}}{q_{\mathbf{w}\left(\text{mode}~p_{\mathbf{w}}\left(\mathbf{w}|\bm{\Gamma}, \mathbf{h}, \bm{\lambda}\right)|\bm{\Gamma}, \bm{\theta}_{\mathbf{w}}\right)}}\right)q_{\bm{\Gamma}}\left(\bm{\Gamma}|\bm{\theta}_{\bm{\Gamma}}\right)d\bm{\Gamma}\right| \leq\footnote{1} \\
+&\leq \int_{\bm{\Gamma}}\left|\left(\frac{q_{\mathbf{w}\left(\text{mode}~q_{\mathbf{w}}\left(\mathbf{w}|\bm{\Gamma}, \bm{\theta}_{\mathbf{w}}\right)|\bm{\Gamma}, \bm{\theta}_{\mathbf{w}}\right)} - q_{\mathbf{w}\left(\text{mode}~p_{\mathbf{w}}\left(\mathbf{w}|\bm{\Gamma}, \mathbf{h}, \bm{\lambda}\right)|\bm{\Gamma}, \bm{\theta}_{\mathbf{w}}\right)}}{q_{\mathbf{w}\left(\text{mode}~p_{\mathbf{w}}\left(\mathbf{w}|\bm{\Gamma}, \mathbf{h}, \bm{\lambda}\right)|\bm{\Gamma}, \bm{\theta}_{\mathbf{w}}\right)}}\right)\right|q_{\bm{\Gamma}}\left(\bm{\Gamma}|\bm{\theta}_{\bm{\Gamma}}\right)d\bm{\Gamma} \leq\footnote{2}\\
+&\leq  L\int_{\bm{\Gamma}}\left(\frac{\left|\text{mode}~q_{\mathbf{w}}\left(\mathbf{w}|\bm{\Gamma}, \bm{\theta}_{\mathbf{w}}\right) - \text{mode}~p_{\mathbf{w}}\left(\mathbf{w}|\bm{\Gamma}, \mathbf{h}, \bm{\lambda}\right)\right|}{q_{\mathbf{w}\left(\text{mode}~p_{\mathbf{w}}\left(\mathbf{w}|\bm{\Gamma}, \mathbf{h}, \bm{\lambda}\right)|\bm{\Gamma}, \bm{\theta}_{\mathbf{w}}\right)}}\right)q_{\bm{\Gamma}}\left(\bm{\Gamma}|\bm{\theta}_{\bm{\Gamma}}\right)d\bm{\Gamma} \leq\footnote{3}\\
+&\leq Const\int_{\bm{\Gamma}}\left|\text{mode}~q_{\mathbf{w}}\left(\mathbf{w}|\bm{\Gamma}, \bm{\theta}_{\mathbf{w}}\right) - \text{mode}~p_{\mathbf{w}}\left(\mathbf{w}|\bm{\Gamma}, \mathbf{h}, \bm{\lambda}\right)\right|q_{\bm{\Gamma}}\left(\bm{\Gamma}|\bm{\theta}_{\bm{\Gamma}}\right)d\bm{\Gamma} =\footnote{4} \\
+& = Const\int_{\bm{\Gamma}}\left|\mathsf{E}_{q_{\mathbf{w}}\left(\mathbf{w}|\bm{\Gamma}, \bm{\theta}_{\mathbf{w}}\right)}\mathbf{w} - \mathsf{E}_{p_{\mathbf{w}}\left(\mathbf{w}|\bm{\Gamma}, \mathbf{h}, \bm{\lambda}\right)}\mathbf{w}\right|q_{\bm{\Gamma}}\left(\bm{\Gamma}|\bm{\theta}_{\bm{\Gamma}}\right)d\bm{\Gamma} \leq\footnote{5}\\
+&\leq Const\int_{\bm{\Gamma}}\int_{\mathbf{w}}\left|\mathbf{w}\right|\left|{q_{\mathbf{w}}\left(\mathbf{w}|\bm{\Gamma}, \bm{\theta}_{\mathbf{w}}\right)} - {p_{\mathbf{w}}\left(\mathbf{w}|\bm{\Gamma}, \mathbf{h}, \bm{\lambda}\right)}\right|q_{\bm{\Gamma}}\left(\bm{\Gamma}|\bm{\theta}_{\bm{\Gamma}}\right)d\mathbf{w}d\bm{\Gamma}
+\end{aligned}
+\end{equation*}
+\end{proof}
+
+\end{document} 
+

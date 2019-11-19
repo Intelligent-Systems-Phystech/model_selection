@@ -1,0 +1,46 @@
+\documentclass[14pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{a4wide}
+
+\begin{document}
+\textbf{Доказать утверждение из \cite{ped}} :\\
+
+Пусть $L$ -- дифференцируемая функция, такая что все стационарные точки $L$ являются локальными минимумами. Пусть также гессиан $\mathbf{H}^{-1}$ функции потерь $L$ является обратимым в каждой стационарной точке\\
+Тогда
+$$
+\nabla_{\mathbf{h}} Q (T(\bm{\theta}_0,\mathbf{h}), \mathbf{h}) = \nabla_{\mathbf{h}}Q(\bm{\theta}^{\eta}, \mathbf{h}) -   \nabla_{\mathbf{h}}\nabla_{\bm{\theta}}L(\bm{\theta}^{\eta}, \mathbf{h})^T\mathbf{H}^{-1}\nabla_{\bm{\theta}}Q(\bm{\theta}^{\eta}, \mathbf{h}).
+$$
+
+\textit{Доказательство}\\
+В стационарных точках:
+$$\nabla_{\bm{\theta}}L(T(\bm{\theta}_0, \mathbf{h})) = 0 $$
+Продифференциируем по $\mathbf{h}$ и воспользуемся chain rule \cite{ped}
+$$\nabla_{\mathbf{h}} \nabla_{\theta} L(T(\bm{\theta}_0,  \mathbf{h})) = \nabla_{\bm{\theta}, \mathbf{h}} L(\bm{\theta}^{\eta}, \mathbf{h}) + \nabla_{\bm{\theta}}^2 L(\bm{\theta}^{\eta}, \mathbf{h}) \frac{\partial \bm{\theta}} {\partial \mathbf{h}} = 0 $$
+
+$$\nabla_{\bm{\theta}, \mathbf{h}} L(\bm{\theta}^{\eta}, \mathbf{h}) = - \nabla_{\bm{\theta}}^2 L(\bm{\theta}^{\eta}, \mathbf{h}) \frac{\partial \bm{\theta}} {\partial \mathbf{h}} = -\mathbf{H} \frac{\partial \bm{\theta}} {\partial \mathbf{h}}$$
+Поскольку $\mathbf{H}^{-1}$ обратим во всех стационарных точках, домножим на $-\mathbf{H}^{-1}$
+$$\frac{\partial \bm{\theta}}{\partial \mathbf{h}} = -\mathbf{H}^{-1}\nabla_{\bm{\theta}, \mathbf{h}}L(\bm{\theta}^{\eta}, \mathbf{h}).
+$$
+Возьмём градиент $Q$ по $\mathbf{h}$
+$$
+&\nabla_{\mathbf{h}}Q(T(\theta_0, \mathbf{h})) = \nabla_{\mathbf{h}}Q(\bm{\theta}^{\eta}, \mathbf{h})+\nabla_{\bm{\theta}}Q(\bm{\theta}^{\eta}, \mathbf{h})^T\frac{\partial \bm{\theta}}{\partial \mathbf{h}}
+$$
+Подставим $\frac{\partial \bm{\theta}}{\partial \mathbf{h}}$ из предыдущего выражения
+$$
+\nabla_{\mathbf{h}}Q(T(\bm{\theta}_0, \mathbf{h}))= \nabla_{\mathbf{h}}Q(\bm{\theta}^{\eta}, \mathbf{h}) - \nabla_{\bm{\theta}}Q(\bm{\theta}^{\eta}, \mathbf{h})^T\mathbf{H}^{-1}\nabla_{\bm{\theta}, \mathbf{h}}L(\bm{\theta}^{\eta}, \mathbf{h}) = $$
+$$= \nabla_{\mathbf{h}}Q(\bm{\theta}^{\eta}, \mathbf{h}) -  \nabla_{\bm{\theta}, \mathbf{h}}L(\bm{\theta}^{\eta}, \mathbf{h})^T\mathbf{H}^{-1}\nabla_{\bm{\theta}}Q(\bm{\theta}^{\eta}, \mathbf{h})   
+$$
+\begin{thebibliography}{10}
+
+	\bibitem{ped}
+	\textit{F. Pedregosa} Hyperparameter optimization with approximate gradient~// arxiv.org, 2016
+	
+\end{thebibliography}
+\end{document} 

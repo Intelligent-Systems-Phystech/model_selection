@@ -1,0 +1,78 @@
+\documentclass[12pt,russian,a4paper]{extarticle}
+
+\usepackage[a4paper,left=10mm,right=10mm, top=10mm,bottom=10mm,bindingoffset=0cm]{geometry}
+\usepackage{amsfonts,amssymb,amsmath}
+\usepackage{nopageno}
+\usepackage{cmap}
+\usepackage{ifthen}
+\usepackage[cp1251]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{tikz}
+\usepackage{wrapfig}
+\usepackage{float}
+
+\newcommand{\Sum}{\displaystyle\sum\limits}
+\newcommand{\Max}{\max\limits}
+\newcommand{\Min}{\min\limits}
+\newcommand{\fromto}[3]{{#1}=\overline{{#2},\,{#3}}}
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\tild}{\widetilde}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\hat}{\widehat}
+\renewcommand{\emptyset}{\varnothing}
+\renewcommand{\epsilon}{\varepsilon}
+\newcommand{\ol}{\overline}
+
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}{\hbox{$#1$}}{}}
+
+%\nofiles
+\begin{document}
+
+\centerline{\large \bf RMAD для SGD без момента}
+\begin{flushright}
+  {\large \bf Выполнил: Плетнев Никита}
+\end{flushright}
+%\bigskip
+%теория 2, практика 2
+
+Выпишем алгоритм SGD без момента (эквивалентен SGD с моментом, равным 0).
+
+\begin{enumerate}
+  \item Вход: начальное значение параметров ${\bf w}_0$, скорости обучения ${\bf \alpha}$ (возможно, разные для каждого шага), функция потерь $L({\bf w},\theta,t)$.
+  \item Инициализировать ${\bf v}_1=0$;
+  \item На каждом шаге при $t=1..T$:
+  \begin{enumerate}
+    \item Вычислить градиент $g_t\sim \nabla_{\bf w}L({\bf w}_t, \theta, t)$;
+    \item Вычислить скорость ${\bf v}_t = -g_t$
+    \item Обновить параметры ${\bf w}_{t+1} = {\bf w}_t + {\bf \alpha}_t{\bf v}_t$;
+  \end{enumerate}
+  \item Выход: обученные параметры ${\bf w}_T$.
+\end{enumerate}
+
+Перепишем этот алгоритм с применением обратного дифференцирования. 
+
+\begin{enumerate}
+  \item Вход: начальное значение параметров ${\bf w}_T$, скорости ${\bf v}_T$, скорость обучения ${\bf \alpha}$ , функции потерь $L({\bf w},\theta,t)$ и $f({\bf w})$.
+  \item Инициализировать $d{\bf v} = 0$, $d\theta=0$, $d\alpha=0$;
+  \item Инициализировать $d{\bf w} = \nabla_{\bf w}f({\bf w}_T)$
+  \item На каждом шаге при $t=T..1$:
+  \begin{enumerate}
+    \item $d\alpha_t=d{\bf w}^T{\bf v}_t$;
+    \item ${\bf w}_{t-1} = {\bf w}_t - \alpha_t{\bf v}_t$;
+    \item $g_{t-1}\sim \nabla_{\bf w}L({\bf w}_{t-1}, \theta, t-1)$
+    \item $v_{t-1} = -g_{t-1}$
+    \item $d{\bf v} = \alpha_td{\bf w}$
+    \item $d{\bf w} = d{\bf w} - d{\bf v}\nabla_{\bf w}\nabla_{\bf w}L({\bf w}_t,\theta,t)$
+    \item $d\theta = d\theta - d{\bf v}\nabla_{\theta}\nabla_{\bf w}L({\bf w}_t,\theta,t)$
+  \end{enumerate}
+  \item Выход: градиент $f({\bf w}_t$ по отношению к ${\bf w}_1$, ${\bf v}_1$, $\alpha$ и $\theta$.
+\end{enumerate}
+
+Использование обратного дифференцирования позволяет производить вычисления со сложностью $O(T)$. Взяв в качестве $\theta$ вектор гиперпараметров ${\bf h}$, получаем требуемый алгоритм RMAD.
+
+\end{document} 
