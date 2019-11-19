@@ -1,0 +1,88 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{euscript}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{caption}
+\usepackage{color}
+\usepackage{bm}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+
+
+\usepackage[toc,page]{appendix}
+
+\usepackage{comment}
+\usepackage{rotating}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\newtheorem{theorem}{Теорема}
+\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{corollary}{Следствие}[theorem]
+\newtheorem{definition}{Определение}[section]
+\newtheorem{example}{Пример}
+
+\numberwithin{equation}{section}
+
+\newcommand*{\No}{No.}
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+
+\begin{document}
+	\section*{Tеория}
+	\begin{lemma}
+		Пусть
+		\begin{enumerate}
+			\item Вариационное распределение $q_{\mathbf{w}}\left(\mathbf{w} | \mathbf{\Gamma}, \boldsymbol{\theta}_{\mathbf{w}}\right)$ и априорное распределение $p(\mathbf{w} | \Gamma, \mathbf{h}, \boldsymbol{\lambda})$ являются абсолютно непрерывными.
+			\item Решение задачи
+			\begin{equation}
+						\mathbf{h}^{*}=\underset{\mathbf{h} \in U_{\mathbf{h}}}{\arg \min } D_{\mathrm{KL}}(q(\mathbf{w}, \mathbf{\Gamma} | \boldsymbol{\theta}) \| p(\mathbf{w}, \mathbf{\Gamma} | \mathbf{h}, \boldsymbol{\lambda}))
+			\end{equation}
+
+			единственно для любого $\boldsymbol{\theta} \in U_{\boldsymbol{\theta}}$.
+			\item  Задана бесконечная последовательность векторов вариационных параметров $\boldsymbol{\theta}[1], \boldsymbol{\theta}[2], \ldots, \boldsymbol{\theta}[i], \cdots \in U_{\boldsymbol{\theta}}$, такая что $$\lim _{i \rightarrow \infty} C_{p}\left(\boldsymbol{\theta}[i] | U_{\mathbf{h}}, \boldsymbol{\lambda}\right)=0$$
+		\end{enumerate}
+	Тогда следующее выражение стремится к нулю:
+	$$\iint_{\mathbf{w}, \mathbf{\Gamma}}\left|p(\mathbf{w} | \mathbf{\Gamma}, \mathbf{h}[i], \boldsymbol{\lambda})-q_{\mathbf{w}}\left(\mathbf{w} | \mathbf{\Gamma}, \boldsymbol{\theta}_{\mathbf{w}}[i]\right)\right| q_{\Gamma}\left(\mathbf{\Gamma} | \boldsymbol{\theta}_{\Gamma}[i]\right) d \mathbf{\Gamma} d \mathbf{w}$$
+	где $\boldsymbol{\theta}[i]=\left[\boldsymbol{\theta}_{\mathrm{w}}[i], \boldsymbol{\theta}_{\Gamma}[i]\right], \mathbf{h}[i]$ --- решение задачи (0.1) для $\boldsymbol{\theta}[i]$.
+	\end{lemma}
+	
+	\begin{proof}
+		Рассмотрим выражение:
+		$$C_{p}\left(\boldsymbol{\theta}[i] | U_{\mathbf{h}}, \boldsymbol{\lambda}\right) = \min _{\mathbf{h} \in U_{\mathbf{h}}} D_{\mathrm{KL}}(q(\mathbf{w}, \mathbf{\Gamma} | \boldsymbol{\theta}[i]) \| p(\mathbf{w}, \mathbf{\Gamma} | \mathbf{h}, \boldsymbol{\lambda}))$$
+		По условию последовательность минимумов сходится к нулю. 
+		$$\lim _{i \rightarrow \infty}  \min _{\mathbf{h} \in U_{\mathbf{h}}} D_{\mathrm{KL}}(q(\mathbf{w}, \mathbf{\Gamma} | \boldsymbol{\theta}[i]) \| p(\mathbf{w}, \mathbf{\Gamma} | \mathbf{h}, \boldsymbol{\lambda})) =0 $$
+		Разложим дивергенцию на два неотрицательных слагаемых.
+		$$D_{\mathrm{KL}}(q(\mathbf{w}, \mathbf{\Gamma} | \boldsymbol{\theta}) \| p(\mathbf{w}, \mathbf{\Gamma} | \mathbf{h}, \boldsymbol{\lambda}))= D_{\mathrm{KL}}\left(q_{\Gamma}\left(\boldsymbol{\Gamma} | \boldsymbol{\theta}_{\Gamma}\right) \| p(\boldsymbol{\Gamma} | \mathbf{h}, \boldsymbol{\lambda})\right)+ $$
+		$$+\mathrm{E}_{\Gamma \sim q_{\mathrm{r}}\left(\Gamma | \theta_{\mathrm{r}}\right)} \mathrm{E}_{\mathrm{w} \sim q_{\mathrm{w}}\left(\mathrm{w} | \mathrm{\Gamma}, \theta_{\mathrm{w}}\right)} \log \left(\frac{q_{\mathrm{w}}\left(\mathbf{w} | \Gamma, \boldsymbol{\theta}_{\mathrm{w}}\right)}{p(\mathbf{w} | \Gamma, \mathbf{h}, \boldsymbol{\lambda})}\right)$$
+		
+
+	Так как сумма двух неотрицательных чисел сходится к 0, тогда и каждое слагаемое сходится к 0. Возьмем последнее:
+	$$0 = \lim _{i \rightarrow \infty} \mathrm{E}_{\Gamma \sim q_{\mathrm{F}}\left(\Gamma | \theta_{\mathrm{r}}[i]\right) }\mathrm{E}_{\mathrm{w} \sim q_{\mathrm{w}}\left(\mathrm{w} | \Gamma, \theta_{\mathrm{w}}[i)\right.} \log \left(\frac{q_{\mathrm{w}}\left(\mathbf{w} | \Gamma, \boldsymbol{\theta}_{\mathrm{w}}[i]\right)}{p(\mathbf{w} | \mathbf{\Gamma}, \mathbf{h}[i], \lambda)}\right) = $$
+	По определению мат. ожидания имеем:
+	$$ = \lim _{i \rightarrow \infty}\left|\int_{\Gamma} \int_{\mathrm{w}} \log \left(\frac{q_{\mathrm{w}}\left(\mathbf{w} | \Gamma, \boldsymbol{\theta}_{\mathrm{w}}[i]\right)}{p(\mathbf{w} | \mathbf{\Gamma}, \mathbf{h}[i], \lambda)}\right) q_{\mathrm{\Gamma}}\left(\mathbf{\Gamma} | \boldsymbol{\theta}_{\mathrm{\Gamma}}[i]\right) q_{\mathrm{w}}\left(\mathbf{w} | \mathbf{\Gamma}, \boldsymbol{\theta}_{\mathrm{w}}[i]\right) d \mathbf{w} d \Gamma\right| \geq $$
+	Воспользуемся неравенством Пинскера:
+	$$\left\|F_{q}\left(\boldsymbol{\theta}_{\mathrm{w}}[i]\right)-F_{p}(\mathbf{h}[i])\right\|_{\mathrm{TV}} \leq \sqrt{\frac{1}{2} \widehat{\mathrm{KL}}\left(p(\mathbf{w} | \Gamma, \mathbf{h}[i], \boldsymbol{\lambda}) \| q_{\mathrm{w}}\left(\mathbf{w} | \Gamma, \boldsymbol{\theta}_{\mathrm{w}}[i]\right)\right)}$$
+	$$2\left(\left\|F_{q}\left(\boldsymbol{\theta}_{\mathrm{w}}[i]\right)-F_{p}(\mathbf{h}[i])\right\|_{\mathrm{TV}}\right)^2
+	\leq  \widehat{\mathrm{KL}}\left(p(\mathbf{w} | \Gamma, \mathbf{h}[i], \boldsymbol{\lambda}) \| q_{\mathrm{w}}\left(\mathbf{w} | \Gamma, \boldsymbol{\theta}_{\mathrm{w}}[i]\right)\right)$$
+	где $\|\cdot\|_{\mathrm{TV}}$ --- расстояние по вариации, $F_{q}, F_{p}$ --- функции распределения $q_{\mathrm{w}}\left(\mathbf{w} | \mathbf{\Gamma}, \boldsymbol{\theta}_{\mathrm{w}}\right), p(\mathbf{w} | \mathbf{\Gamma}, \mathbf{h}, \boldsymbol{\lambda}), \widehat{\mathrm{KL}}\left(p(\mathbf{w} | \mathbf{\Gamma}, \mathbf{h}, \boldsymbol{\lambda}) \| q_{\mathbf{w}}\left(\mathbf{w} | \mathbf{\Gamma}, \boldsymbol{\theta}_{\mathbf{w}}\right)\right)$ --- дивергенция при фиксированной структуре
+	$$\geq \lim _{i \rightarrow \infty} \int_{\Gamma}2\left\|F_{q}\left(\boldsymbol{\theta}_{\mathrm{w}}[i]\right)-F_{p}(\mathbf{h}[i])\right\|_{\mathrm{TV}}^{2} q_{\mathrm{\Gamma}}\left(\boldsymbol{\Gamma} | \boldsymbol{\theta}_{\Gamma}[i]\right) d \boldsymbol{\Gamma} \geq 0$$
+	Получаем:
+	$$\lim _{i \rightarrow \infty} \int_{\Gamma}\left\|F_{q}\left(\boldsymbol{\theta}_{\mathrm{w}}[i]\right)-F_{p}(\mathbf{h}[i])\right\|_{\mathrm{TV}}^{2} q_{\Gamma}\left(\boldsymbol{\Gamma} | \boldsymbol{\theta}_{\Gamma}[i]\right) d \boldsymbol{\Gamma}\geq$$
+	По неравенству Йенсена:
+	$$\geq \lim _{i \rightarrow \infty}\left(\int_{\Gamma}\left\|F_{q}\left(\boldsymbol{\theta}_{\mathrm{w}}[i]\right)-F_{p}(\mathbf{h}[i])\right\|_{\mathrm{TV}} q_{\Gamma}\left(\boldsymbol{\Gamma} | \boldsymbol{\theta}_{\Gamma}[i]\right) d \boldsymbol{\Gamma}\right)^{2} \geq 0$$ 
+	Тогда 
+	$$\lim _{i \rightarrow \infty} \int_{\Gamma}\left\|F_{q}\left(\boldsymbol{\theta}_{\mathrm{w}}[i]\right)-F_{p}(\mathbf{h}[i])\right\|_{\mathrm{TV}} q_{\Gamma}\left(\boldsymbol{\Gamma} | \boldsymbol{\theta}_{\Gamma}[i]\right) d \boldsymbol{\Gamma}=0$$
+	Далее, применяя лемму Шеффе:
+	$$\lim _{i \rightarrow \infty}  \iint_{\mathbf{w}, \mathbf{\Gamma}}\left|p(\mathbf{w} | \mathbf{\Gamma}, \mathbf{h}[i], \boldsymbol{\lambda})-q_{\mathbf{w}}\left(\mathbf{w} | \mathbf{\Gamma}, \boldsymbol{\theta}_{\mathbf{w}}[i]\right)\right| q_{\mathbf{\Gamma}}\left(\mathbf{\Gamma} | \boldsymbol{\theta}_{\Gamma}[i]\right) d \mathbf{\Gamma} d \mathbf{w}=0$$
+		\end{proof}
+\end{document}
