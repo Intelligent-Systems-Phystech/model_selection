@@ -29,12 +29,12 @@ def build_params(parameters_dict, module, epsilon_setting):
 
 def get_prior_std(p):
     stdv = 1
-    if p.dim() > 1:
-        for i in range(p.dim() - 1):
-            stdv = stdv * p.size()[i + 1]
-        stdv = 1 / np.sqrt(stdv)
-    else:
-        stdv = 1e-2
+#     if p.dim() > 1:
+#         for i in range(p.dim() - 1):
+#             stdv = stdv * p.size()[i + 1]
+#         stdv = 1 / np.sqrt(stdv)
+#     else:
+#         stdv = 1e-2
     return stdv
 
 
