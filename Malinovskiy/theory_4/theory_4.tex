@@ -1,0 +1,81 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{euscript}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{caption}
+\usepackage{color}
+\usepackage{bm}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+
+
+\usepackage[toc,page]{appendix}
+
+\usepackage{comment}
+\usepackage{rotating}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\newtheorem{theorem}{Теорема}
+\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{corollary}{Следствие}[theorem]
+\newtheorem{definition}{Определение}[section]
+\newtheorem{example}{Пример}
+
+\numberwithin{equation}{section}
+
+\newcommand*{\No}{No.}
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+
+\begin{document}
+	\section*{Tеория}
+	\begin{lemma}
+Пусть задан компакт $U=U_{\mathrm{h}} \times U_{\theta}$ и $\lambda_{\mathrm{struct}}^{\mathrm{Q}}=0$. Пусть решение задачи $$\min _{\mathbf{h} \in U_{\mathbf{h}}} D_{\mathrm{KL}}\left(q\left(\mathbf{w}, \mathbf{\Gamma} | \boldsymbol{\theta}_{2}\right) \| p(\mathbf{w}, \mathbf{\Gamma} | \mathbf{h}, \boldsymbol{\lambda})\right)$$
+является единственным для некоторых $\lambda_{\text {prior } 1}^{\mathrm{Q}}, \lambda_{\text {prior } 2}^{\mathrm{Q}}, \lambda_{\text {prior } 1}^{\mathrm{Q}}>\lambda_{\text {prior } 2}^{\mathrm{Q}}$ на $U$ при некоторых фиксированных $\lambda_{\text {likelihood }}^{Q}, \lambda_{\text {prior }}^{\mathrm{L}}, \lambda_{\text {temp }}, \lambda_{1}, \lambda_{2}$.
+Пусть также решения задач
+$$\mathbf{h}^{*}=\underset{\mathbf{h}}{\arg \max } Q(\mathbf{h} | \mathbf{y}, \mathbf{X}, \boldsymbol{\theta}, \boldsymbol{\lambda})$$
+$$\boldsymbol{\theta}^{*}=\underset{\boldsymbol{\theta}}{\arg \max } L(\boldsymbol{\theta} | \mathbf{y}, \mathbf{X}, \mathbf{h}, \boldsymbol{\lambda})$$
+являются единственными на $U$ при $\lambda_{\text {prior } 1}^{\mathrm{Q}}, \lambda_{\text {prior } 2}^{\mathrm{Q}}$ и $\lambda_{\text {likelihood }}^{\mathrm{Q}}, \lambda_{\text {prior }}^{\mathrm{L}}, \lambda_{\text {temp }}$. Тогда справедливо следующее неравенство:
+$$ D_{K L}\left(q\left(\mathbf{w}, \Gamma | \boldsymbol{\theta}_{1}\right) \| p\left(\mathbf{w}, \Gamma | \mathbf{h}_{1}\right)\right)<D_{K L}\left(q\left(\mathbf{w}, \Gamma | \boldsymbol{\theta}_{2}\right) \| p\left(\mathbf{w}, \Gamma | \mathbf{h}_{2}\right)\right)$$
+
+где $\mathbf{h}_{1}, \boldsymbol{\theta}_{1}, \mathbf{h}_{2}, \boldsymbol{\theta}_{2}$ ---  решения задачи при
+$\lambda_{\text {prior } 1}^{Q}, \lambda_{\text {prior } 2}^{Q}$
+$$\theta_{1}=\theta^{*}\left(\mathbf{h}_{1}\right), \quad \theta_{2}=\theta^{*}\left(\mathbf{h}_{2}\right)$$
+\end{lemma}	
+	
+	\begin{proof}
+		Запишем в следующем виде:
+		$$D_{\mathrm{KL}}\left(q\left(\mathbf{w}, \mathbf{\Gamma} | \boldsymbol{\theta}_{1}\right) \| p\left(\mathbf{w}, \mathbf{\Gamma} | \mathbf{h}_{1}, \boldsymbol{\lambda}_{1}\right)\right)=D_{\mathrm{KL}}\left(q\left(\mathbf{w}, \boldsymbol{\Gamma} | \boldsymbol{\theta}_{1}\right) \| p\left(\mathbf{w}, \mathbf{\Gamma} | \mathbf{h}_{1}, \boldsymbol{\lambda}^{\prime}\right)\right)$$
+		$$
+		D_{\mathrm{KL}}\left(q\left(\mathbf{w}, \mathbf{\Gamma} | \boldsymbol{\theta}_{2}\right) \| p\left(\mathbf{w}, \mathbf{\Gamma} | \mathbf{h}_{2}, \boldsymbol{\lambda}_{2}\right)\right)=D_{\mathrm{KL}}\left(q\left(\mathbf{w}, \mathbf{\Gamma} | \boldsymbol{\theta}_{2}\right) \| p\left(\mathbf{w}, \mathbf{\Gamma} | \mathbf{h}_{2}, \boldsymbol{\lambda}^{\prime}\right)\right)
+		$$
+		Так как данные дивергенции зависят только от тройки метапараметров и не зависят от остальных.
+		
+		Из условия следует единственность данных решений $\mathbf{h}_{1}, \boldsymbol{\theta}_{1}, \mathbf{h}_{2}, \boldsymbol{\theta}_{2}$ , подставим их, тогда получаем следующее:
+		$$\lambda_{\text {likelihood }}^{Q} E_{q\left(\mathbf{w}, \mathbf{\Gamma} | \theta_{1}\right)} \log p(\mathbf{y} | \mathbf{X}, \mathbf{w}, \Gamma)- \lambda_{\text {prior }_{1}}^{Q} D_{\mathrm{KL}}\left(q\left(\mathbf{w}, \mathbf{\Gamma} | \boldsymbol{\theta}_{1}\right) \| p\left(\mathbf{w}, \boldsymbol{\Gamma} | \mathbf{h}_{1}, \boldsymbol{\lambda}^{\prime}\right)\right)+\log p\left(\mathbf{h}_{1} | \boldsymbol{\lambda}_{1}\right)>$$
+		$$> \lambda_{\text {likelihood }}^{Q} E_{q\left(\mathbf{w}, \Gamma | \theta_{2}\right)} \log p(\mathbf{y} | \mathbf{X}, \mathbf{w}, \Gamma)-\lambda_{\text {prior } 1}^{Q} D_{\mathrm{KL}}\left(q\left(\mathbf{w}, \Gamma | \boldsymbol{\theta}_{2}\right) \| p\left(\mathbf{w}, \boldsymbol{\Gamma} | \mathbf{h}_{2}, \boldsymbol{\lambda}^{\prime}\right)\right)+\log p\left(\mathbf{h}_{2} | \boldsymbol{\lambda}_{2}\right)$$
+		$$ \lambda_{\text {likelihood }}^{Q} \mathrm{E}_{q\left(\mathbf{w}, \mathbf{\Gamma} | \theta_{2}\right)} \log p(\mathbf{y} | \mathbf{X}, \mathbf{w}, \Gamma)
+-\lambda_{\text {prior } 2}^{Q} D_{\mathrm{KL}}\left(q\left(\mathbf{w}, \mathbf{\Gamma} | \boldsymbol{\theta}_{2}\right) \| p\left(\mathbf{w}, \boldsymbol{\Gamma} | \mathbf{h}_{2}, \boldsymbol{\lambda}^{\prime}\right)\right)+\log p\left(\mathbf{h}_{2} | \boldsymbol{\lambda}_{2}\right)>
+		$$
+		$$
+		>\lambda_{\text {likelihood }}^{Q} E_{q\left(\mathbf{w}, \Gamma | \theta_{1}\right)} \log p(\mathbf{y} | \mathbf{X}, \mathbf{w}, \Gamma)-\lambda_{\text {prior } 2}^{\mathrm{Q}} D_{\mathrm{KL}}\left(q\left(\mathbf{w}, \mathbf{\Gamma} | \boldsymbol{\theta}_{1}\right) \| p\left(\mathbf{w}, \boldsymbol{\Gamma} | \mathbf{h}_{1}, \boldsymbol{\lambda}^{\prime}\right)\right)+\log p\left(\mathbf{h}_{1} | \boldsymbol{\lambda}_{1}\right)
+		$$
+		Исспользуем оба неравенства и выносим общий множитель:
+		$$\left(\lambda_{\text {prior } 2}^{\mathrm{Q}}-\lambda_{\text {prior } 1}^{\mathrm{Q}}\right) D_{\mathrm{KL}}\left(q\left(\mathbf{w}, \Gamma | \boldsymbol{\theta}_{1}\right) \| p\left(\mathbf{w}, \boldsymbol{\Gamma} | \mathbf{h}_{1}, \boldsymbol{\lambda}^{\prime}\right)\right) >$$
+		$$\left(\lambda_{\text {prior } 2}^{\mathrm{Q}}-\lambda_{\text {prior } 1}^{\mathrm{Q}}\right) D_{\mathrm{KL}}\left(q\left(\mathbf{w}, \mathbf{\Gamma} | \boldsymbol{\theta}_{2}\right) \| p\left(\mathbf{w}, \mathbf{\Gamma} | \mathbf{h}_{2}, \boldsymbol{\lambda}^{\prime}\right)\right)$$
+		Сокращаем и используем отрицательность
+		$$D_{\mathrm{KL}}\left(q\left(\mathbf{w}, \Gamma | \boldsymbol{\theta}_{1}\right) \| p\left(\mathbf{w}, \mathbf{\Gamma} | \mathbf{h}_{1}, \boldsymbol{\lambda}^{\prime}\right)\right)<D_{\mathrm{KL}}\left(q\left(\mathbf{w}, \mathbf{\Gamma} | \boldsymbol{\theta}_{2}\right) \| p\left(\mathbf{w}, \mathbf{\Gamma} | \mathbf{h}_{2}, \boldsymbol{\lambda}^{\prime}\right)\right)$$
+
+	
+		\end{proof}
+\end{document}
