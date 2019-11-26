@@ -1,0 +1,70 @@
+\documentclass[12pt,russian,a4paper]{extarticle}
+
+\usepackage[a4paper,left=10mm,right=10mm, top=10mm,bottom=10mm,bindingoffset=0cm]{geometry}
+\usepackage{amsfonts,amssymb,amsmath}
+\usepackage{nopageno}
+\usepackage{cmap}
+\usepackage{ifthen}
+\usepackage[cp1251]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{tikz}
+\usepackage{wrapfig}
+\usepackage{float}
+
+\newcommand{\Sum}{\displaystyle\sum\limits}
+\newcommand{\Max}{\max\limits}
+\newcommand{\Min}{\min\limits}
+\newcommand{\fromto}[3]{{#1}=\overline{{#2},\,{#3}}}
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\tild}{\widetilde}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\hat}{\widehat}
+\renewcommand{\emptyset}{\varnothing}
+\renewcommand{\epsilon}{\varepsilon}
+\newcommand{\ol}{\overline}
+
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}{\hbox{$#1$}}{}}
+
+%\nofiles
+\begin{document}
+
+\centerline{\large \bf ƒоказательство утверждени€ 2}
+\begin{flushright}
+  {\large \bf ¬ыполнил: ѕлетнев Ќикита}
+\end{flushright}
+%\bigskip
+%теори€ 2, практика 1
+
+≈сли условное распределение не зависит от некоторого метапараметра, то добавление этого метапараметра к списку условий не изменит распределение и его характеристики. ѕоэтому можно переписать данные $KL$-дивергенции так:
+
+$D_{KL}(q(w|\Gamma, \theta_1) || p(w, \Gamma|h_1)) = D_{KL}(q(w|\Gamma, \theta_1) || p(w, \Gamma|h_1, \lambda_1)) = D_{KL}(q(w|\Gamma, \theta_1) || p(w, \Gamma|h_1, \lambda'))$;
+
+$D_{KL}(q(w|\Gamma, \theta_2) || p(w, \Gamma|h_2)) = D_{KL}(q(w|\Gamma, \theta_2) || p(w, \Gamma|h_2, \lambda_2)) = D_{KL}(q(w|\Gamma, \theta_2) || p(w, \Gamma|h_2, \lambda'))$.
+
+ѕодставл€€ решени€ указанных задач, которые по условию €вл€ютс€ единственными, получаем:
+
+$\lambda_{likelihood}^Q E_{q(w,\Gamma|\theta_1)}\log{p(y|X, w, \Gamma)} - \lambda_{prior\ 1}^Q D_{KL}(q(w|\Gamma, \theta_1) || p(w, \Gamma|h_1, \lambda')) + \log{p(h_1|\lambda_1)} >\\ 
+> \lambda_{likelihood}^Q E_{q(w,\Gamma|\theta_2)}\log{p(y|X, w, \Gamma)} - \lambda_{prior\ 1}^Q D_{KL}(q(w|\Gamma, \theta_2) || p(w, \Gamma|h_2, \lambda')) + \log{p(h_2|\lambda_2)}$ а также
+
+$\lambda_{likelihood}^Q E_{q(w,\Gamma|\theta_2)}\log{p(y|X, w, \Gamma)} - \lambda_{prior\ 2}^Q D_{KL}(q(w|\Gamma, \theta_2) || p(w, \Gamma|h_2, \lambda')) + \log{p(h_2|\lambda_2)} >\\
+> \lambda_{likelihood}^Q E_{q(w,\Gamma|\theta_1)}\log{p(y|X, w, \Gamma)} - \lambda_{prior\ 2}^Q D_{KL}(q(w|\Gamma, \theta_1) || p(w, \Gamma|h_1, \lambda')) + \log{p(h_1|\lambda_1)}$.
+
+—ложим неравенства и отнимем одинаковые слагаемые от обеих частей, получим:
+
+$- \lambda_{prior\ 1}^Q D_{KL}(q(w|\Gamma, \theta_1) || p(w, \Gamma|h_1, \lambda')) - \lambda_{prior\ 2}^Q D_{KL}(q(w|\Gamma, \theta_2) || p(w, \Gamma|h_2, \lambda')) >\\ > - \lambda_{prior\ 1}^Q D_{KL}(q(w|\Gamma, \theta_2) || p(w, \Gamma|h_2, \lambda')) - \lambda_{prior\ 2}^Q D_{KL}(q(w|\Gamma, \theta_1) || p(w, \Gamma|h_1, \lambda'))$.
+
+”далим лишние $\lambda$ и перегруппируем слагаемые:
+
+$(\lambda_{prior\ 1}^Q - \lambda_{prior\ 2}^Q) D_{KL}(q(w|\Gamma, \theta_1) || p(w, \Gamma|h_1)) <
+(\lambda_{prior\ 1}^Q - \lambda_{prior\ 2}^Q) D_{KL}(q(w|\Gamma, \theta_2) || p(w, \Gamma|h_2))$.
+
+ѕо условию множитель в скобках положителен. ƒелим на него и получаем:
+
+$D_{KL}(q(w|\Gamma, \theta_1) || p(w, \Gamma|h_1)) < D_{KL}(q(w|\Gamma, \theta_2) || p(w, \Gamma|h_2))$, что и требовалось доказать.
+
+\end{document} 
