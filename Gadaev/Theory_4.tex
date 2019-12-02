@@ -1,0 +1,28 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath,mathrsfs,mathtext}
+\usepackage{graphicx, epsfig}
+\usepackage{tabularx}
+\usepackage{bm}
+\usepackage{subfig}
+
+\begin{document}
+\textbf{Задание 1}:
+Доказать, что при устремлении параметра температуры к бесконечности, плотность Gumbel-Softmax концентрируется в центре симплекса.
+\\
+
+
+\textbf{Доказательство}\\
+Рассмотрим случайный вектор $\bm{y} \in \Delta^{k-1}$ из  Gumbel-Softmax распределения. Как показано в ~\cite{gumbel} $$y_i = \frac{\exp{(\log{(\pi_i)} + g_i)/\tau)}}{\sum_{j=1}^{k} \exp{(\log{(\pi_j)} + g_j)/\tau})} $$
+где $g_j$ из $Gumbel(0, 1)$. Возьмём предел $y_i$ при $\tau \rightarrow \infty$:
+   $$\lim\limits_{\tau \rightarrow \infty} y_i = \lim\limits_{\tau \rightarrow \infty} \frac{\exp{(\log{(\pi_i)} + g_i)/\tau)}}{\sum_{j=1}^{k} \exp{(\log{(\pi_j)} + g_j)/\tau})} = \lim\limits_{\tau \rightarrow \infty} \frac{1}{\sum_{j=1}^{k} 1} = \frac{1}{k}$$
+   Таким образом при $\tau \rightarrow \infty$ все компоненты распределны равномерно, значит плотность Gumbel-Softmax концентриурется в центре симплекса.
+
+
+
+\begin{thebibliography}{9}
+	\bibitem{gumbel}
+	Jang, E, Gu, S, and Poole, B 2016 Categorical Reparameterization with Gumbel-Softmax. Available at http://arxiv.org/abs/1611.01144
+\end{thebibliography}
+\end{document}
