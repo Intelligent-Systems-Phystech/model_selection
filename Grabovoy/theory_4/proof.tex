@@ -1,0 +1,47 @@
+\documentclass[12pt, twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+
+\usepackage{amsthm}
+\usepackage{a4wide}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{euscript}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{caption}
+\usepackage{color}
+\usepackage{bm}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+
+\newtheorem{theorem}{Теорема}
+
+
+\begin{document}
+\begin{theorem}
+При устремления параметра температуры~$\tau\to+\infty$ плотность \textbf{Gumbel--Softmax} концентрируется в центре симплекса.
+\end{theorem}
+
+\begin{proof}
+Для доказательства рассмотрим то, как сэмплируется вектор из распределения~$\textbf{Gumbel--Softmax}\left(\textbf{s}, \tau\right)$\footnotetext[1]{https://arxiv.org/pdf/1611.01144.pdf}:
+\begin{equation*}
+\begin{aligned}
+y_i = \frac{\exp\left(\left(s_i+g_i\right)/ \tau\right)}{\sum_{j}^{K} \exp\left(\left(s_j+g_j\right)/ \tau\right)},
+\end{aligned}
+\end{equation*}
+где~$g_j$ сэмпл из $\textbf{Gumbel}\left(0, 1\right)$.
+Тогда устремляя~$\tau\to \infty$ получаем:
+\begin{equation*}
+\begin{aligned}
+y_i \to_{\tau\to\infty} \frac{1}{K},
+\end{aligned}
+\end{equation*}
+откуда получаем, что все вершины распределены равномерно, следовательно плотность концентрируется в центре симплекса.
+\end{proof}
+
+\end{document} 
+
