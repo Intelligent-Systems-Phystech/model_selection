@@ -1,0 +1,61 @@
+\documentclass[a4paper,12pt,notitlepage]{article}
+\usepackage[T2A]{fontenc}
+\def\R{{\mathbb{R}}}
+\def\Q{{\cal Q}}
+\def\L{{\textbf{L}}}
+\def\t{{\boldsymbol{\theta}}}
+\def\gam{{\boldsymbol{\Gamma}}}
+\def\lam{{\boldsymbol{\lambda}}}
+\def\w{{\textbf{w}}}
+\def\h{{\textbf{h}}}
+\def\H{{\textbf{H}}}
+\def\y{{\textbf{y}}}
+\def\X{{\textbf{X}}}
+
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amssymb,amsmath}
+\usepackage{geometry}
+\geometry{left=2cm}
+\geometry{right=1.5cm}
+\geometry{top=1.5cm}
+\geometry{bottom=1.5cm}
+\textheight=25cm % высота текста
+\textwidth=16cm % ширина текста
+\oddsidemargin=0pt % отступ от левого края
+\topmargin=0pt % отступ от верхнего края
+\parindent=0pt % абзацный отступ
+\parskip=0pt % интервал между абзацами
+\tolerance=2000 % терпимость к "жидким" строкам
+\flushbottom % выравнивание высоты страниц
+\usepackage{fancyhdr}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Самохина Алина}
+\lhead{Задание по курсу "Выбор модели глубокого обучения"}
+\rfoot{Page \thepage}
+\DeclareMathOperator*{\argmin}{\arg\min}
+
+\begin{document}
+%\title{Домашнее задание №1\\Выбор модели глубокого обучения}
+%\author{Самохина Алина, 904a}
+%\date{\today}
+%\maketitle
+
+\section*{Утверждение 1}
+Доказать, что при устремлении параметра температуры к бесконечности, плотность
+Gumbel-Softmax концентрируется в центре симплекса.
+(формулы Gumbel-Softmax взяты из статьи Categorical Reparameterization with Gumbel-Softmax
+E.Jang et al.)
+
+\subsection*{Доказательство}
+Рассмотрим компоненты k-мерного случайного вектора
+$$
+y_i = \frac{exp((\log(\pi_i) + g_i)/\tau )}{\sum_{j = 1}^kexp((\log(\pi_j ) + g_j )/\tau)}$$
+в которых $g_1\dots g_k$ i.i.d. и $g_j \in Gumbel(0,1) \ \forall j=\overline{1, k}$
+
+Устремляя $\tau\rightarrow\inf$ имеем:
+$$\lim_{\tau \rightarrow \inf}y_i = \frac{1}{k}$$
+$\Longrightarrow$ все компоненты рассмтариваемого вектора распределены равномерно\\ $\Longrightarrow$ плотность концентрируется в центре симплекса 
+\end{document}
